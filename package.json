@@ -1,0 +1,25 @@
+{
+  "name": "emekatwobrothers",
+  "version": "1.0.0",
+  "description": "an ecommerce store",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Bille",
+  "license": "ISC",
+  "dependencies": {
+  	"socketio-file-upload": "^0.7.0",
+  	"socket.io": "^2.3.0",
+    "express": "^4.17.1",
+    "nodemailer": "^6.3.0",
+    "body-parser": "^1.19.0",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0",
+    "express-handlebars": "^3.1.0",
+    "cookie-parser": "^1.4.4",
+    "express-session": "^1.16.2",
+    "csurf": "^1.10.0"
+  },
+  "devDependencies": {}
+}

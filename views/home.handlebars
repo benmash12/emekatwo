@@ -1,0 +1,185 @@
+<input type="hidden" id="data-visited" value="[]">
+	<input type="hidden" id="data-categories" value="{{categories_str}}">
+	<input type="hidden" id="data-subcategories" value="{{subcategories_str}}">
+	<input type="hidden" id="data-ads" value="{{ads}}">
+	<input type="hidden" id="data-products_latest" value="{{products_latest}}">
+	<input id="csrf" type="hidden" value="{{_csrfToken}}">
+	<div id="preloader">
+	<div>
+	<p></p>
+	</div>
+	</div>
+	<header>
+	<div class="htop">
+	<div class="hlef">
+	<img alt="logo" src="/img/logo.svg">
+	</div>
+	<div class="hrig">
+	<button style="outline:none;box-shadow:none" class="btn btn-lg" id="navicon"><i class="fa fa-navicon"></i></button>
+	</div>
+	</div>
+	<div class="hbot">
+	<a href="/">Home</a>
+	<button onclick="tab('search')">Search</button>
+	<a href="/cart">Cart <span id="cart_counter" class="badge">{{cn}}</span></a>
+	<button onclick="tab('categories')">Categories</button>
+	<button onclick="join()">Register</button>
+	<button onclick="login()">Login</button>
+	</div>
+	</header>
+	<div id="ads">
+		
+	</div>
+	
+	<div  class="hs__wrapper">
+		<div class="hs__header">
+			<h3 class="heading">Top Items</h3>
+			<div class="hs__arrows">
+				<a class="arrow disabled arrow-prev"></a>
+				<a class="arrow arrow-next"></a>
+			</div>
+		</div>
+		<ul class="hs">
+			{{#each top}}
+			<li onclick="visit_product({{id}})" class="hs__item">
+			<div class="hs__item__image__wrapper">
+			<img class="hs__item__image" src="/uploads/{{picture}}" alt=""/>
+			<span class="discount badge">-{{discount}}%</span>
+			</div>
+			<div class="hs__item__description">
+			<span class="hs__item__title">{{title}} </span>
+			<span class="hs__item__subtitle">&#8358;{{#pricing price discount}}{{/pricing}}</span>
+			</div>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	
+	<br><br>
+	
+	<div  class="hs__wrapper">
+	<div class="hs__header">
+	<h3 class="heading"> Highest Discount Rates</h3>
+	<div class="hs__arrows">
+	<a class="arrow disabled arrow-prev"></a>
+	<a class="arrow arrow-next"></a>
+	</div>
+	</div>
+	<ul class="hs">
+	{{#each products_dis}}
+	<li onclick="visit_product({{id}})" class="hs__item">
+	<div class="hs__item__image__wrapper">
+	<img class="hs__item__image" src="/uploads/{{picture}}" alt=""/>
+	<span class="discount badge">-{{discount}}%</span>
+	</div>
+	<div class="hs__item__description">
+	<span class="hs__item__title">{{title}}</span>
+	<span class="hs__item__subtitle">&#8358;{{#pricing price discount}} {{/pricing}}</span>
+	</div>
+	</li>
+	{{/each}}
+	</ul>
+	</div>
+	
+	<div class="wrap">
+	<h3 class="heading">Featured Categories <button onclick="tab('categories')" class="btn btn-default btn-xs">see more</button></h3>
+		<div id="featured" class="featured">
+			
+		</div>
+	</div>
+	
+	<div class="wrap">
+	<h3 class="heading">New Items</h3>
+		<div id="new_products" class="products">
+			
+		</div>
+		<button id="" onclick="fetch_more(this)" class="menu_butt">Load More</button>
+	</div>
+	
+	<br><br>
+	<div  class="hs__wrapper">
+	<div class="hs__header">
+	<h3 class="heading">Recently Visited</h3>
+	<div class="hs__arrows">
+	<a class="arrow disabled arrow-prev"></a>
+	<a class="arrow arrow-next"></a>
+	</div>
+	</div>
+	<ul class="hs">
+	{{#each recent}}
+	<li onclick="visit_product({{id}})" class="hs__item">
+	<div class="hs__item__image__wrapper">
+	<img class="hs__item__image" src="/uploads/{{picture}}" alt=""/>
+	<span class="discount badge">-{{discount}}%</span>
+	</div>
+	<div class="hs__item__description">
+	<span class="hs__item__title">{{title}} </span>
+	<span class="hs__item__subtitle">&#8358;{{#pricing price discount}}{{/pricing}}</span>
+	</div>
+	</li>
+	{{/each}}
+	</ul>
+	</div>
+	
+	<br>
+	<footer>
+		<div style="margin:0px;padding:0px;" class="container-fluid">
+			<div  class="col-xs-4 text-center">
+				<br><button class="btn btn-xs btn-link" onclick="help()">HELP CENTER</button><br>
+			</div>
+			<div class="col-xs-4 text-center">
+				<br><a class="btn btn-xs btn-link" href="/privacy_policy">POLICY</a><br>
+			</div>
+			<div class="col-xs-4 text-center">
+			<br><a class="btn btn-link btn-xs" href="/terms">TERMS OF USE</a><br>
+			</div>
+		</div>
+		<div class="container-fluid text-center">
+			<hr>
+			<small>All Rights Reserved.</small>
+			<br><br>
+		</div>
+	</footer>
+	
+	
+	<!--tabs-->
+	<div id="tab-search" class="tab">
+	<div class="header">
+	<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+	<p>Live Search</p>
+	</div>
+		<div id="searchbox">
+			<input placeholder="click to search" onkeyup="search(this.value)">
+		</div>
+		<div class="container-fluid" id="search_results">
+			
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<div id="tab-categories" class="tab">
+	<div class="header">
+	<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+	<p>Categories</p>
+	</div>
+	<div id="categories">
+		{{#each categories}}
+		<div data-category="{{category}}" onclick="subcategory(this)" class="text_box">
+		{{category}}
+		</div>
+		{{/each}}
+	</div>
+	</div>
+	
+	<div id="tab-subcategories" class="tab">
+	<div class="header">
+	<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+	<p id="subs_title"></p>
+	</div>
+	<div id="subs">
+	
+	</div>

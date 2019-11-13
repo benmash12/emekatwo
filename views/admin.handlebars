@@ -1,0 +1,305 @@
+<input type="hidden" id="data-visited" value="[]">
+	<input type="hidden" id="data-categories" value="[]">
+	<input type="hidden" id="data-subcategories" value="[]">
+	<input type="hidden" id="data-products" value="[]">
+	<input type="hidden" id="data-orders" value="[]">
+	<input type="hidden" id="data-support" value="[]">
+	<input type="hidden" id="data-users" value="[]">
+	<input type="hidden" id="data-adverts" value="[]">
+	<input type="hidden" id="data-promo" value="[]">
+	<input type="hidden" id="data-paystack-mode" value="[]">
+	<input type="hidden" id="data-states" value="[]">
+	<div id="preloader">
+	<div>
+	<p></p>
+	</div>
+	</div>
+	<div id="container">
+		<div id="admin_side">
+			<div class="a_side_head">
+				<img src="img/logo.svg" id="site_logo">
+				<button id="a_side_toggle" onclick="sidebar()"><i class="fa fa-close"></i></button>
+			</div><br>
+			<div class="container-fluid">
+				<button style="color" onclick="note()" id="noteBtn" class="menu_butt"><i class="fa fa-bell"></i> Notifications</button>
+				<button onclick="add_new_product()" class="menu_butt"><i class="fa fa-plus-circle"></i> Add New Product</button>
+				<button onclick="change_password_f()" class="menu_butt"><i class="fa fa-lock"></i> Change Password</button>
+				<button onclick="logout()" class="menu_butt"><i class="fa fa-sign-out"></i> Logout</button>
+				<button onclick="add_new_advert()" class="menu_butt"><i class="fa fa-upload"></i> Upload new Advert</button>
+				<button onclick="manage_adverts()" class="menu_butt"><i class="fa fa-th-large"></i> Manage Adverts</button>
+				<button onclick="send_newsletters()" class="menu_butt"><i class="fa fa-envelope"></i> Send Newsletters</button>
+				<button onclick="add_new_category()" class="menu_butt"><i class="fa fa-plus"></i> Add New Category</button>
+				<button onclick="add_new_subcategory()" class="menu_butt"><i class="fa fa-plus"></i> Add New Subcategory</button>
+				<button onclick="manage_categories()" class="menu_butt"><i class="fa fa-list"></i> Manage Categories</button>
+				<button onclick="manage_users()" class="menu_butt"><i class="fa fa-users"></i> View Users</button>
+				<button onclick="manage_promo_codes()" class="menu_butt"><i class="fa fa-credit-card"></i> Manage Promo Codes</button>
+				<button onclick="tab('topi')" class="menu_butt"><i class="fa fa-th"></i> Manage Top Products(items)</button>
+				<button onclick="tab('paystack')" class="menu_butt"><i class="fa fa-dollar"></i> Configure Paystack</button>
+				<button onclick="tab('smtp')" class="menu_butt"><i class="fa fa-at"></i> Configure SMTP</button>
+				<button onclick="tab('states')" class="menu_butt"><i class="fa fa-map-marker"></i> Configure Locations</button>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>Site Stats</strong>
+					</div>
+					<div class="panel-body">
+						<p><strong>Today's Visits: </strong><span id="stat-visit-today">0</span></p>
+						<p><strong>This Month's Visits: </strong><span id="stat-visit-month">0</span></p>
+						<p><strong>Users: </strong><span id="stat-users">0</span></p>
+						<p><strong>Products: </strong><span id="stat-products">0</span></p>
+						<p><strong>Total Orders: </strong><span id="stat-orders">0</span></p>
+					</div>
+				</div>
+				<hr>
+				<div class="text-center">
+					<small>Developed by Bille Web</small>
+					<br><br>
+				</div>
+			</div>
+		</div>
+		<div id="admin_main">
+			<header>
+				<button onclick="sidebar()" id="side_toggle" class="tab_button"><i class="fa fa-navicon"></i></button>
+				<button style="border-bottom-color:#555" onclick="db_tab(1,this)" id="" class="tab_button"><i class="fa fa-home"></i></button>
+				<button onclick="db_tab(2,this)" id="" class="tab_button"><i class="fa fa-th"></i></button>
+				<button onclick="db_tab(3,this)" id="mess-btn" class="tab_button"><i class="fa fa-comment"></i></button>
+			</header>
+			<div style="display:block" id="db-tab-1" class="db-tab">
+				<h3 class="heading"> Orders</h3>
+				<div data-det="" class="grids" id="orders">
+					
+					
+				</div>
+			</div>
+			<div id="db-tab-2" class="db-tab">
+				<h3 class="heading">Products <button class="btn btn-xs btn-default" onclick="search_products()"><i class="fa fa-search"></i></button></h3>
+				<div id="products" class="grids">
+					
+				</div>
+			</div>
+			<div id="db-tab-3" class="db-tab">
+				<h3 class="heading">Help Center Messages</h3>
+				<div id="messages">
+					<div onclick="view_message(this)" class="message">
+						<span>user id</span>
+						<small>registered | online</small>
+					</div>
+					<div onclick="" class="message">
+					<span>user id</span>
+					<small>unregistered</small>
+					</div>
+					<div onclick="" class="message">
+					<span>user id</span>
+					<small>registered | online</small>
+					</div>
+					<div onclick="" class="message">
+					<span>user id</span>
+					<small>registered | online</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- tabs -->
+	<div id="tab-order" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Order</p>
+		</div><br>
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Order Details</strong>
+				</div>
+				<div id="orderDetails" class="panel-body">
+					
+				</div>
+				<div class="panel-footer text-center">
+					<small><strong>TIP:</strong>click on the back button at the top to update order status or package location</small>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div id="tab-product" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p id="">Product</p>
+		</div>
+		<br>
+		<div class="container-fluid">
+			<div id="product-tab-img" style="width:100%;text-align:center;display:flex;display:webkit-flex;align-items:center;justify-content:center;height:200px; background:#fff;overflow:hidden;" class="">
+			</div>
+			<h4 class="" id="product-tab-title">product title</h4>
+			<div id="product-tab-top"></div>
+			<div id="product-tab-buttons"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Stats</strong>
+				</div>
+				<div id="product-tab-stats" class="panel-body">
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Details</strong>
+				</div>
+				<div id="product-tab-dets" class="panel-body">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="tab-message" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p id="message_header"></p>
+		</div>
+		<div style="padding:5px" class="container_fluid" id="message_window">
+			
+		</div>
+		<div class="msender">
+		<textarea placeholder="type message..."></textarea>
+		<button onclick="msend(this)" ><i class="fa fa-send"></i></button>
+		</div>
+	</div>
+	
+	<div id="tab-adverts" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Manage Adverts</p>
+		</div>
+		<div id="adverts">
+			
+		</div>
+	</div>
+	
+	<div id="tab-newsletters" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Send Newsletters</p>
+		</div><br>
+		<div class="container-fluid">
+			<div class="well">
+			<strong>Receipients:</strong> <span id="newsRec"></span>
+			</div>
+			<br>
+			<div class="inp-grp">
+			<input id="news_title" placeholder="title of email" class="inp-txt">
+			</div>
+			<br>
+			<div class="news">
+			<div class="news_header">
+			<button onclick="news_add_a()"><i class="fa fa-link"></i></button>
+			<button onclick="news_add_h()"><i class="fa fa-header"></i></button>
+			</div>
+			<div class="news_body">
+			<textarea id="news_bod" placeholder="type email here..."></textarea>
+			</div>
+			</div><br><br>
+			<div class="inp-grp">
+			<input id="news_btn_txt" placeholder="callback button text" class="inp-txt">
+			</div>
+			<div class="inp-grp">
+			<input id="news_btn_href" placeholder="callback button link" class="inp-txt">
+			</div><br><br>
+			<button onclick="news_send()" class="btn btn-default">send</button>
+			<br><br>
+		</div>
+	</div>
+	
+	<div id="tab-categories" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Manage Categories</p>
+		</div><br>
+		<div id="catego" class="container-fluid">
+			
+		</div>
+	</div>
+	
+	<div id="tab-users" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Users</p>
+			<button onclick="users_search()" style="outline:none" class="btn btn-lg"><i class="fa fa-search"></i></button>
+		</div><br>
+		<div id="users" class="container-fluid">
+	
+		</div>
+	</div>
+	
+	<div id="tab-pcodes" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Promo Codes</p>
+			<button onclick="add_promo_codes()" style="outline:none" class="btn btn-lg"><i class="fa fa-plus-circle"></i></button>
+		</div><br>
+		<div id="promo" class="container-fluid">
+	
+		</div>
+	</div>
+	
+	<div id="tab-paystack" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Configure Paystack</p>
+		</div><br>
+		<div class="container-fluid">
+		<button onclick="paystack(1)" id="paystack_mode_btn" data-mode="" class="menu_butt">Switch Mode (<span id="paystack_mode_span"></span>)</button>
+		<button onclick="paystack(2)" class="menu_butt">View Keys</button>
+		<button onclick="paystack(3)" class="menu_butt">Set Live Public Key</button>
+		<button onclick="paystack(4)" class="menu_butt">Set Live Private Key</button>
+		<button onclick="paystack(5)" class="menu_butt">Set Test Public Key</button>
+		<button onclick="paystack(6)" class="menu_butt">Set Test Private Key</button>
+		</div>
+	</div>
+	
+	
+	
+	<div id="tab-note" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Notifications</p>
+		</div><br><div id="notin" class="well"> </div>
+		<div id="notes" class="container-fluid">
+	
+		</div>
+	</div>
+	
+	<div id="tab-topi" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Manage Top Items</p>
+		</div><br>
+		<div id="topItems" class="container-fluid">
+		</div>
+	</div>
+	
+	<div id="tab-states" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Allow Paid On Delivery In:</p>
+		</div><br>
+		<div id="states" class="container-fluid">
+		</div>
+	</div>
+	
+	<div id="tab-smtp" class="tab">
+		<div class="header">
+			<button onclick="cli()" style="outline:none" class="btn btn-lg"><i class="fa fa-chevron-left"></i></button>
+			<p>Configure SMTP</p>
+		</div><br>
+		<div  class="container-fluid">
+			<button onclick="smtp(1)" class="menu_butt">Set Host</button>
+			<button onclick="smtp(2)" class="menu_butt">Set Port</button>
+			<button onclick="smtp(3)" class="menu_butt">Set Username</button>
+			<button onclick="smtp(4)" class="menu_butt">Set Password</button>
+			<button onclick="smtp(5)" class="menu_butt">Set Phone Number</button>
+			<button onclick="smtp(6)" class="menu_butt">Set callback email</button>
+		</div>
+	</div>

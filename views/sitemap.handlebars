@@ -1,0 +1,28 @@
+<h1> Sitemap</h1>
+
+<h3>Static Pages</h3>
+<a href="/">Home</a><br>
+<a href="/cart">Cart</a><br>
+<a href="/terms">Terms and Conditions</a><br>
+<a href="/privacy_policy">Privacy Policy</a><br>
+
+<br><br><br>
+
+<h3>Categories</h3>
+{{#each categories}}
+<a href="/category/{{category}}">{{category}}</a><br>
+{{/each}}
+
+<br><br><br>
+
+<h3>Subcategories</h3>
+{{#each subcategories}}
+<a href="/subcategory/{{subcategory}}">{{subcategory}}</a><br>
+{{/each}}
+
+<br><br><br>
+
+<h3>Items</h3>
+{{#each products}}
+<a href="/item/{{id}}">{{title}}</a><br>
+{{/each}}

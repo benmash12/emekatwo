@@ -1,0 +1,1 @@
+{"paystack":{"mode":"test","test":{"public_key":null,"private_key":null},"live":{"public_key":null,"private_key":null}},"smtp":{"from":"billeshop@billeshop.com","host":"in-v3.mailjet.com","port":"587","username":"f3f339c4ecfe73976f285f95238ac9a0","password":"2487ca30ec65bb1cac0138c4ec54cdf6"},"functions":{}}

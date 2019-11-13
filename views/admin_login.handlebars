@@ -1,0 +1,45 @@
+<form id="login">
+	<input name="_csrf" type="hidden" value="{{_csrfToken}}">
+	<div class="inp-grp">
+		<label>Username</label>
+		<input name="admus" id="admus" type="text" class="inp-txt">
+	</div>
+	<div class="inp-grp">
+		<label>Password</label>
+		<input name="admpw" id="admpw" type="password" class="inp-txt">
+	</div>
+	<button class="btn btn-default" style="outline:none" type="submit">Login</button>
+</form>
+<script>
+$(document).ready(function (){
+	$("#login").on("submit", function (e){
+		e.preventDefault();
+		var username = $("#admus").val();
+		var password = $("#admpw").val();
+		if(username == "" || password == ""){
+			bootbox.alert("All fields are required");
+		}
+		else{
+			preloader(1);
+			$.ajax({
+				url:'/admin/login',
+				type:'POST',
+				data:$(this).serialize(),
+				success: function (data){
+					if(data.succ){
+						window.location = "/admin";
+					}
+					else{
+						preloader(0);
+						bootbox.alert(""+data);
+					}
+				},
+				error: function (){
+					preloader(0);
+					bootbox.alert("There was a problem submitting this form... please try again!");
+				}
+			});
+		}
+	});
+});
+</script>

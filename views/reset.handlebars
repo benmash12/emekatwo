@@ -1,0 +1,60 @@
+{{#section 'head'}}
+	
+{{/section}}
+
+<form id="reset">
+	<input name="_csrf" type="hidden" value="{{_csrfToken}}">
+	<input name="resem" type="hidden" value="{{email}}">
+	<div class="inp-grp">
+		<label>New Password<span> Must contain atleast an uppercase, a lowercase, a number and a symbol and must be between 6 to 30 chracters long</span></label>
+		<input class="inp-txt" id="respw" name="respw" type="password" class="inp-grp">
+	</div>
+	<div class="inp-grp">
+		<label>Confirm New Password</label>
+		<input class="inp-txt" id="rescpw" name="rescpw" type="password" class="inp-grp">
+	</div>
+	<button type="submit" style="outline:none" class="btn btn-default" >Reset Password</button>
+</form>
+<script>
+$(document).ready(function(){
+	$("#reset").on("submit", function(e){
+		e.preventDefault();
+		var pw = $("#respw").val();
+		var cpw = $("#rescpw").val();
+		var err = [];
+		var vpw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&*_.])[^]*$/;
+		if(!vpw.test(pw) || pw.length < 6 || pw.length > 30){
+		err.push("please follow instructions when choosing a password!");
+		}
+		if(cpw == ""){
+		err.push("please confirm your password!");
+		}
+		if(cpw !== pw){
+		err.push("passwords do not match!");
+		}
+		if(err.length !== 0){
+			bootbox.alert(""+err.join("<br>"));
+		}
+		else{
+			preloader(1);
+			$.ajax({
+				url:'/prox/reset_pass',
+				type:'POST',
+				data:$(this).serialize(),
+				success: function (data){
+					if(data.succ){
+						bootbox.alert("password changed successfully");
+						window.location = "/";
+					}
+					else{
+						bootbox.alert("ERROR: "+data);
+					}
+				},
+				error: function (){
+					bootbox.alert("NETWORK ERROR... please try again");
+				}
+			});
+		}
+	});
+});
+</script>

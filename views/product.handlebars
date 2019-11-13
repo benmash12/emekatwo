@@ -1,0 +1,84 @@
+<div id="cover"><img class="img_res" src="/uploads/{{p_picture}}"></div>
+<input id="csrf" name="_csrf" type="hidden" value="{{_csrfToken}}">
+<h1 id="title">{{p_title}}</h1>
+
+<div class="container-fluid">
+	<div class="col-xs-6 text-left">
+		<span id="price_before" ><strike>&#8358;{{product.price}}</strike></span>
+	</div>
+	<div class="col-xs-6 text-right">
+		<span id="price_after" >&#8358;{{#pricing product.price product.discount}}{{/pricing}}(-{{product.discount}}%)</span>
+	</div>
+</div><br><br>
+<div class="container-fluid">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10 text-center">
+		<button onclick="add_to_cart({{product.id}},{{product.stock}})" class="menu_butt">Add to Cart</button>
+	</div>
+	<div class="col-xs-1"></div>
+</div><br> <br>
+<div class="container-fluid">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Stats</strong>
+		</div>
+		<div class="panel-body">
+			<p><strong>In Stock: </strong>{{product.stock}}</p><br>
+			<p><strong>Description</strong><br><blockquote>{{product.description}}</blockquote></p><br>
+			<p><strong>Specifications</strong><br>
+				<blockquote>{{#specs product.specifications}}{{/specs}}</blockquote>
+			</p>
+		</div>
+	</div>
+</div>
+<h3 class="heading">Sponsored</h3>
+<div id="ads"></div>
+<div  class="hs__wrapper">
+		<div class="hs__header">
+			<h3 class="heading">Top Items</h3>
+			<div class="hs__arrows">
+				<a class="arrow disabled arrow-prev"></a>
+				<a class="arrow arrow-next"></a>
+			</div>
+		</div>
+		<ul class="hs">
+			{{#each top}}
+			<li onclick="visit_product({{id}})" class="hs__item">
+			<div class="hs__item__image__wrapper">
+			<img class="hs__item__image" src="/uploads/{{picture}}" alt=""/>
+			<span class="discount badge">-{{discount}}%</span>
+			</div>
+			<div class="hs__item__description">
+			<span class="hs__item__title">{{title}} </span>
+			<span class="hs__item__subtitle">&#8358;{{#pricing price discount}}{{/pricing}}</span>
+			</div>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	
+<br><br>
+<div  class="hs__wrapper">
+		<div class="hs__header">
+			<h3 class="heading">Recently Visited</h3>
+			<div class="hs__arrows">
+				<a class="arrow disabled arrow-prev"></a>
+				<a class="arrow arrow-next"></a>
+			</div>
+		</div>
+		<ul class="hs">
+			{{#each recent}}
+			<li onclick="visit_product({{id}})" class="hs__item">
+			<div class="hs__item__image__wrapper">
+			<img class="hs__item__image" src="/uploads/{{picture}}" alt=""/>
+			<span class="discount badge">-{{discount}}%</span>
+			</div>
+			<div class="hs__item__description">
+			<span class="hs__item__title">{{title}} </span>
+			<span class="hs__item__subtitle">&#8358;{{#pricing price discount}}{{/pricing}}</span>
+			</div>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	

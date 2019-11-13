@@ -1,0 +1,13 @@
+<input id="data-username" value="{{username}}" type="hidden">
+<input id="data-user" value="{{userStr}}" type="hidden">
+<input id="data-support" value="[]" type="hidden">
+<input id="data-orders" value="[]" type="hidden">
+<input id="data-visited" value="[]" type="hidden">
+
+
+<button onclick="tab('orders')" class="menu_butt"> Manage My Orders</button>
+<button onclick="track_order()" class="menu_butt">Track an Order</button>
+<button onclick="tab('message')" class="menu_butt">Help Center <span id="message_counter"></span></button>
+<button onclick="update_password()" class="menu_butt">Change My Password</button>
+<button onclick="news()" class="menu_butt">Newsletters Subscription</button>
+<button onclick="logout()" class="menu_butt">Logout</button>
